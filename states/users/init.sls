@@ -63,6 +63,28 @@ foo-group:
     - require:
       - user: foo
 
+/home/foo/.buildout/default.cfg:
+  file.managed:
+    - source: salt://users/buildout_default.cfg
+    - user: foo
+    - group: foo
+    - mode: 644
+    - template: jinja
+    - makedirs: True
+    - require:
+      - user: foo
+
+/home/foo/.buildout/mr.developer.cfg:
+  file.managed:
+    - source: salt://users/buildout_mrdeveloper.cfg
+    - user: foo
+    - group: foo
+    - mode: 644
+    - template: jinja
+    - makedirs: True
+    - require:
+      - user: foo
+
 foo-vim-config:
   hg.latest:
     - name: {{ salt['pillar.get']('vim_repo', 'https://bitbucket.org/derega/vimrc') }}
